@@ -22,6 +22,16 @@ Generate a histogram with all samples, and using a low bin width such as 0.02.
 
 Now, manually define the thresholds for 1 copy, 2 copies, 3 copies, and 4 copies.
 
-The example bellow illustrate a run for KIR2DL1 in 200 samples.
+The example bellow illustrate a run for KIR2DL1 in 200 samples. 
+
+We have set the threshold for ZERO copies as < 0.1
+
+We have set the threshold for ONE copy as > 0.1 AND < 0.56
+
+We have set the threshold for TWO copies as > 0.56 AND < 1.24
+
+There is one sample that seems to present more than two copies.
 
 ![Alt text](KIR2DL1.jpg?raw=true "KIR2DL1 target/reference ratio histogram")
+
+
