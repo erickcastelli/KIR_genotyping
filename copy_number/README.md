@@ -16,4 +16,9 @@ Use the Perl script **compare_kir_coverage.pl** to calculate read depths and rat
 
 The output_TXT_file is a file containing the read depths observed in each interval, the averages for the target and reference, and the ratio between them.
 
+To calculate copy number, we recomend to open this output_TXT_file in EXCEL or another spreedshet program, or even using R.
+
+Generate a histogram with all samples, and using a low bin width such as 0.01. 
+
+Now, manually define the thresholds for 1 copy, 2 copies, 3 copies, and 4 copies.
 
