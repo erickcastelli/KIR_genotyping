@@ -12,7 +12,7 @@ After the alignment optimization, copy all the ".adjusted.bam" files to a single
 
 Use the Perl script **compare_kir_coverage.pl** to calculate read depths and ratios, as follows KIR2DL1 as an example:
 
-> perl compare_kir_coverage.pl -i intervals.txt -b the_directory_with_all_bams -t KIR2DL1 -o output_TXT_file -i
+> perl compare_kir_coverage.pl -i intervals.txt -b the_directory_with_all_bams -t KIR2DL1 -o output_TXT_file
 
 The output_TXT_file is a file containing the read depths observed in each interval, the averages for the target and reference, and the ratio between them.
 
