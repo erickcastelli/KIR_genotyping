@@ -75,6 +75,6 @@ Using IGV, please check some of the hla-mapper outputted BAM files (Sample_Name.
 ## STEP 3 - Copy number evaluation
 After the hla-mapper optimization of all samples, proceed with the calculation of copy number for each loci.
 
-To do that, use the script provided in /copy_number, and follow the instruction in [copy number estimatio]: /copy_numer/README.ad
+To do that, use the script provided in /copy_number, and follow the instruction in [GitHub](/copy_nuber/)
 
 
