@@ -22,3 +22,6 @@ Generate a histogram with all samples, and using a low bin width such as 0.01.
 
 Now, manually define the thresholds for 1 copy, 2 copies, 3 copies, and 4 copies.
 
+The example bellow illustrate a run for KIR2DL1 in 200 samples.
+
+![Alt text](relative/path/to/img.jpg?raw=true "Title")
