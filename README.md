@@ -73,6 +73,9 @@ First, you can perform the analysis as step 1A, or you can proceed with this ste
 Using IGV, please check some of the hla-mapper outputted BAM files (Sample_Name.adjusted.bam). Make sure everything is OK. You can compare the original BAM (using BWA MEM) with the new one (using hla-mapper).
 
 ***YOU SHOULD PERFORM THE NEXT STEPS FOR EACH GENE SEPARATELY.***
+
+***YOU SHOULD PERFORM THE NEXT STEPS FOR EACH GENE SEPARATELY.***
+
 ***YOU SHOULD PERFORM THE NEXT STEPS FOR EACH GENE SEPARATELY.***
 
 ## STEP 3 - Copy number evaluation
