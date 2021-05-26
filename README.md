@@ -11,13 +11,15 @@ The advantage of this method is that it calls variants, haplotypes, and then KIR
 
 This tutorial is suitable for whole-genome sequencing (WGS), whole-exome sequencing (WES), and amplicon sequencing. It has been tested with Illumina sequencing data. Please note that coverage is essential. We recommend a coverage of at least 30x for WGS, and 100x for WES and amplicons. Read size is also important, and you will get better results when dealing with a read size larger than 75 nucleotides. **Copy number evaluation is not suitable for amplicon sequencing.**
 
-This procedure needs sample size. The minimum sample size we have tested in 150 samples. For a single-sample allele call, please use another method (PING). However, if you have a large sample size, this procedure is highly accurate and will provide you with SNPs (in the hg38 reference genome), haplotypes, allele calls, copy numbers, and allow you to detect new variants.
+This procedure needs sample size. The minimum sample size we have tested is 150 samples. For a single-sample allele call, please use another method (PING). However, if you have a large sample size, this procedure is highly accurate and will provide you with SNPs (in the hg38 reference genome), haplotypes, allele calls, copy numbers, and allow you to detect new variants.
 
 
 ## How to cite this pipeline
 This pipeline is described in:
 
 KIR2DL4 genetic diversity in a Brazilian population sample: implications for transcription regulation and protein diversity in samples with different ancestry backgrounds. Immunogenetics volume 73, pages 227–241 (2021). doi 10.1007/s00251-021-01206-9
+
+Immunogenetics of resistance to SARS-CoV-2 infection in discordant couples. MedRxiv 2021, doi 10.1101/2021.04.21.21255872
 
 ## Packages and software needed
 - hla-mapper 4 (www.castelli-lab.net/apps/hla-mapper) 
@@ -71,4 +73,8 @@ First, you can perform the analysis as step 1A, or you can proceed with this ste
 Using IGV, please check some of the hla-mapper outputted BAM files (Sample_Name.adjusted.bam) using IGV. Make sure everything is OK. You can compare the original BAM (using BWA MEM) with the new one (using hla-mapper).
 
 ## STEP 3 - Copy number evaluation
+After the hla-mapper optimization of all samples, proceed with the calculation of copy number for each loci.
+
+To do that, use the script provided in /copy_number, and follow the instruction in [copy number estimatio]: /copy_numer/README.ad
+
 
