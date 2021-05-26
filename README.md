@@ -13,6 +13,7 @@ This tutorial is suitable for whole-genome sequencing (WGS), whole-exome sequenc
 
 This procedure needs sample size. The minimum sample size we have tested in 150 samples. For a single-sample allele call, please use another method (PING). However, if you have a large sample size, this procedure is highly accurate and will provide you with SNPs (in the hg38 reference genome), haplotypes, allele calls, copy numbers, and allow you to detect new variants.
 
+
 ## How to cite this pipeline
 This pipeline is described in:
 
