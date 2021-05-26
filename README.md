@@ -168,9 +168,6 @@ The command above will perform a phasex run with the default parameters, i.e., 5
 
 The final VCF file (in the phasex output folder, file results.vcf) is a phased VCF with the haplotypes for samples that present a haplotype with a empirical P value higher than 51%. You may adjust that according to your needs. Please check the phasex manual for details. 
 
-```diff
-+ Please note that the phased VCF generated up to this step is suitable for association studies and other purposes. For example, you can call HLA alleles, or you can convert it to a phased ARLEQUIN file (using vcfx arlequin).
-```
 
 ## STEP 10 - Introducing unphased singletons (optional)
 
@@ -180,4 +177,7 @@ These unphased genotypes are not considered when we export complete sequences an
 
 **To reintroduce unphased singletons, use the script /support/insert_singletons_back_to_phased_data.pl**
 
-
+```diff
+- Please note that the phased VCF generated up to this step SHOULD NOT BE USED FOR ASSOCIATION STUDIES.
+- Samples with just one copy of a specific gene are encoded are homozygous (two copies of the same alleles)
+```
