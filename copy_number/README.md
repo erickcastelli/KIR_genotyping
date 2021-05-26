@@ -24,4 +24,4 @@ Now, manually define the thresholds for 1 copy, 2 copies, 3 copies, and 4 copies
 
 The example bellow illustrate a run for KIR2DL1 in 200 samples.
 
-![Alt text](relative/path/to/img.jpg?raw=true "Title")
+![Alt text](KIR2DL1.jpg?raw=true "KIR2DL1 target/reference ratio histogram")
