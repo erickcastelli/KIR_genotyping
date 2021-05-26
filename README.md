@@ -86,13 +86,9 @@ To do that, use the script provided in /copy_number, and follow the instruction 
 ## STEP 4 - Variant call using GATK 4
 We recommend GATK 4 HaplotypeCaller to call variants. The hla-mapper BAM file is already prepared for GATK.
 
-For each sample, run GATK HaplotypeCaller in the GVCF mode, such as this example:
+For each sample, run GATK HaplotypeCaller in the GVCF mode, such as this example. Here we are using KIR2DL4 as an example. **Please check hla-mapper manual the correct intervals and references for each gene.
 
-> java -Xmx32g -jar gatk-package-4.2.0.0-local.jar HaplotypeCaller -R reference_genome -I Sample_name.adjusted.bam -O output_folder/Sample_name.MHC.g.vcf -L chr6:29700000-33150000 -ERC GVCF --max-num-haplotypes-in-population 256 --native-pair-hmm-threads thread_number --allow-non-unique-kmers-in-ref TRUE
-
-```diff
-- Attention: If you are interested only in one gene (e.g., HLA-A), you should adjust the interval accordingly.
-```
+> java -Xmx32g -jar gatk-package-4.2.0.0-local.jar HaplotypeCaller -R reference_genome -I Sample_name.adjusted.bam -O output_folder/Sample_name.KIR2DL4.g.vcf -L chr19:54801610-54815000 -ERC GVCF --max-num-haplotypes-in-population 256 --native-pair-hmm-threads thread_number --allow-non-unique-kmers-in-ref TRUE
 
 You need to adjust the amount of memory (in this case, 32Gb), the path for the reference genome (reference_genome), the path for the hla-mapper output BAM (Sample_name.adjusted.bam), the output folder (output_folder), the sample name, and the number of threads (thread_number).
 
@@ -100,16 +96,13 @@ After processing all your samples, you need to concatenate all G.VCF files in a 
 
 Now, you can genotype your GVCF using GATK GenotypeGVCFs, as follows:
 
-> java -Xmx32g -jar gatk-package-4.2.0.0-local.jar GenotypeGVCFs -R reference_genome -O output_folder/MHC.vcf -L chr6:29700000-33150000 --variant output_folder/All_samples.MHC.g.vcf --dbsnp path_to_dbsnp_vcf
+> java -Xmx32g -jar gatk-package-4.2.0.0-local.jar GenotypeGVCFs -R reference_genome -O output_folder/KIR2DL4.vcf -L chr19:54801610-54815000 --variant output_folder/All_samples.KIR2DL4.g.vcf --dbsnp path_to_dbsnp_vcf
 
-You need to ajust the amont of memory (in this case, 32Gb), the path for the reference genome (reference_genome), the path for the single GVCF file (output_folder/All_samples.MHC.g.vcf), the output folder (output_folder), and the path to dbsnp (path_to_dbsnp_vcf). dbSNP is optional.
+You need to adjust the amont of memory (in this case, 32Gb), the path for the reference genome (reference_genome), the path for the single GVCF file (output_folder/All_samples.MHC.g.vcf), the output folder (output_folder), and the path to dbsnp (path_to_dbsnp_vcf). dbSNP is optional.
 
-```diff
-- Attention: If you are interested only in one gene (e.g., HLA-A), you should adjust the interval accordingly.
-```
 
-## STEP 4 - Variant refinement
-There are many ways to proceed with variant refinement, i.e., removing artifacts, including GATK VQRS (very good for full genomes and exomes) and vcfx (better for small datasets). For HLA genes, we recommend vcfx.
+## STEP 5 - Variant refinement
+There are many ways to proceed with variant refinement, i.e., removing artifacts, including GATK VQRS (very good for full genomes and exomes) and vcfx (better for small datasets). For KIR genes, we recommend vcfx.
 
 Recode the VCF file using vcftools. This is important for the next steps to correct some minor encoding errors introduced by GATK.
 
@@ -135,10 +128,7 @@ The last VCF file contains only the variants that have passed the vcfx checkpl/e
 
 ```diff
 - Attention: In this step, you should manually check your VCF file and remove possible artifacts that may have passed the vcfx workflow.
-+ Please note that the VCF generated up to this step is suitable for association studies and other purposes, but it consists of unphased genotypes with some missing alleles.
 ```
-
-***Attention: We recommend performing the next steps for each gene separately. For that, you need to extract from the VCF the variants overlapping the gene you are interested, and perform the next steps. You can use vcftools for that, indicating the intervals with --from-bp and --to-bp. You may also try this pipiline with all variants together, but this decreases accuracy for detecting HLA alleles***
 
 ## STEP 6 - Normalize your multi-allelic VCF to biallelic VCF
 > bcftools norm -m-any VCF > BIALLELIC.VCF
@@ -191,41 +181,3 @@ These unphased genotypes are not considered when we export complete sequences an
 **To reintroduce unphased singletons, use the script /support/insert_singletons_back_to_phased_data.pl**
 
 
-## STEP 11 - Calling complete sequences and HLA alleles
-For this step, we will generate complete sequences for each HLA gene, and compare this sequences with known ones from the IPD-IMGT/HLA database.
-
-**You need to use the script /support/allele_calling/export_count_translate_name_v3.pl**
-
-> perl export_count_translate_name_v3.pl
-
--v [indicate the phased VCF produced by phasex or the one with the unphased singletons re-introduced]
-
--o [indicate where the outputs should be placed]
-
--t [indicate a prefix for the files, such as the name the gene. Do not use spaces.]
-
--c [indicate the fasta file with known exonic sequences (nuc) from IPD-IMGT/HLA]
-
--p [indicate the fasta file with known protein sequences (prot) from IPD-IMGT/HLA]
-
--g [indicate the fasta file with known genomic sequences (gen) from IPD-IMGT/HLA]
-
--b [indicate the BED file for this gene (e.g., HLA-G.exons.bed)]
-
--s [indicate the starting position for this gene, which is indicated in the gemomic BED file (e.g., HLA-G.genomic.bed)]
-
--e [indicate the ending position for this gene, which is indicated in the gemomic BED file (e.g., HLA-G.genomic.bed)]
-
--r [indicate where is the sequence (fasta format) for chromosome 6, version hg38]
-
--i [For some genes (.e.g, HLA-B and HLA-C), which are encoded in the reverse strand, you need to indicate this to invert all sequences]
-
-The script will output the following files in the folder you have indicated:
-
-- TAG.genomic.fas (a fasta file with two complete sequences for every individual, one per chromosome [h1 and h2])
-- TAG.genomic.counted.fas (a fasta file with one copy of each different sequence, and their name according to the IPD-IMGT/HLA database, or and indication that this is a new sequence).
-- TAG.cds.fas (a fasta file with two CDS sequences for every individual, one per chromosome [h1 and h2])
-- TAG.cds.counted.fas (a fasta file with one copy of each different sequence, and their names according to the IPD-IMGT/HLA database, or and indication that this is a new sequence).
-- TAG.prot.fas (the translation of the CDS sequences of each individual, one per chromosome [h1 and h2])
-- TAG.prot.counted.fas (a fasta file with one copy of each different sequence, and their names according to the IPD-IMGT/HLA database, or and indication that this is a new sequence).
-- TAG.db.txt (a tab separated file with the results for all samples)
