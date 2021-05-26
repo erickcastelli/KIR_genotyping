@@ -70,11 +70,13 @@ First, you can perform the analysis as step 1A, or you can proceed with this ste
 - You need to indicate a different output folder for each sample
 
 ## STEP 2 - Check some of the hla-mapper BAM files using IGV 
-Using IGV, please check some of the hla-mapper outputted BAM files (Sample_Name.adjusted.bam) using IGV. Make sure everything is OK. You can compare the original BAM (using BWA MEM) with the new one (using hla-mapper).
+Using IGV, please check some of the hla-mapper outputted BAM files (Sample_Name.adjusted.bam). Make sure everything is OK. You can compare the original BAM (using BWA MEM) with the new one (using hla-mapper).
+
+***You should perform the following steps for each KIR gene separatedly.***
 
 ## STEP 3 - Copy number evaluation
 After the hla-mapper optimization of all samples, proceed with the calculation of copy number for each loci.
 
-To do that, use the script provided in /copy_number, and follow the instruction in https://github.com/erickcastelli/KIR_genotyping/copy_number
+To do that, use the script provided in /copy_number, and follow the instruction in folder /copy_number or https://github.com/erickcastelli/KIR_genotyping/blob/main/copy_number/README.md
 
-
+For the next step (variant calling)
