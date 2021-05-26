@@ -179,5 +179,5 @@ These unphased genotypes are not considered when we export complete sequences an
 
 ```diff
 - Please note that the phased VCF generated up to this step SHOULD NOT BE USED FOR ASSOCIATION STUDIES.
-- Samples with just one copy of a specific gene are encoded are homozygous (two copies of the same alleles)
+- Samples with just one copy of a specific gene are encoded as homozygous (two copies of the same alleles)
 ```
